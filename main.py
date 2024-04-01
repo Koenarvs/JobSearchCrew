@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from utils import log_agent_output
 from crewai import Crew
 from tasks import JobSearchTasks
 from agents import JobSearchAgents
@@ -64,7 +65,8 @@ crew = Crew(
         match_jobs_task,
         write_report_task
     ],
-    verbose=True
+    verbose=True,
+    step_callback=lambda x: log_agent_output(x, "Crew")
 )
 
 result = crew.kickoff()

@@ -1,4 +1,5 @@
 from crewai import Agent
+from utils import log_agent_output
 
 class JobSearchAgents:
     def __init__(self, search_tool):
@@ -12,13 +13,14 @@ class JobSearchAgents:
             allow_delegation=False,
             verbose=True,
             memory=True,
+            step_callback=lambda x: log_agent_output(x, "Resume Analyzer"),
             tools=[]
         )
 
     def job_searcher_agent(self):
         return Agent(
             role='Job Search Agent',
-            goal="""Your primary goal is to conduct a comprehensive search across various job sites, job boards, and company career pages to identify open positions that closely align with the candidate's skills, experience, and qualifications. You should leverage your extensive knowledge of job markets, industry trends, and search techniques to find the most relevant and suitable job opportunities. Your aim is to compile a diverse list of job postings that match the candidate's background and career aspirations, focusing on roles that require similar skills, experience level, and domain expertise. Additionally, you should prioritize job listings that offer growth opportunities, competitive compensation, and a good cultural fit for the candidate.""",
+            goal="""Your primary goal is to conduct a comprehensive search across various job sites, job boards, and company career pages to identify specific open positions that closely align with the candidate's skills, experience, and qualifications. Focus on finding individual job postings with detailed descriptions and application links, rather than general job board listings. Prioritize job listings that offer growth opportunities, competitive compensation, and a good cultural fit for the candidate.""",
             backstory="""You are a highly skilled Job Search Agent with a deep understanding of various job markets and industries. Your expertise lies in navigating job search platforms, databases, and company websites to identify the most relevant and promising job opportunities. You possess a keen eye for detail and can quickly identify key requirements and qualifications in job descriptions. Your extensive knowledge of industry trends, job titles, and company backgrounds allows you to make informed recommendations and find the best matches for the candidate. You are well-versed in using advanced search techniques, Boolean operators, and keyword optimizations to refine your search results and uncover hidden opportunities. Your ability to analyze job postings, compare them with the candidate's profile, and assess the potential fit makes you an invaluable asset in the job search process.""",
             allow_delegation=False,
             verbose=True,
@@ -54,6 +56,7 @@ class JobSearchAgents:
             allow_delegation=False,
             verbose=True,
             memory=True,
+            step_callback=lambda x: log_agent_output(x, "Job Matching Agent"),
             tools=[]
         )
 
@@ -77,5 +80,6 @@ Your ultimate objective is to create a report that not only informs the candidat
             allow_delegation=False,
             verbose=True,
             memory=True,
+            step_callback=lambda x: log_agent_output(x, "Crew"),
             tools=[]
         )
