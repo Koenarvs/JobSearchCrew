@@ -1,5 +1,3 @@
-Here is the Markdown version of the text in the image:
-
 # Job Search Assistant
 
 A CrewAI-powered application designed to streamline the job search process by analyzing resumes, searching for relevant job postings, matching candidates with suitable positions, and generating comprehensive job application reports.
