@@ -5,7 +5,7 @@ class JobSearchTasks():
     def analyze_resume_task(self, agent, resume_text):
         return Task(
             description=dedent(f"""Analyze the provided resume to extract the candidate's skills, experience, and qualifications: {resume_text}"""),
-            expected_output="""A summary of the candidate's key skills, experience, and qualifications.""",
+            expected_output="""A summary of the candidate's key skills, experience, and qualifications, candidates location or desired location to find work, this will either be the candidates city )from thier address) or specified in the summary. If location is not present list as remote'work from home.""",
             agent=agent,
             result_context_key='resume_analysis'
         )
