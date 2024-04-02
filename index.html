@@ -83,12 +83,12 @@
             const filePath = filePathInput.value;
     
         // Make an AJAX request to the Flask server
-        fetch('/run_script', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ filePath: filePath })
+        fetch('http://localhost:5000/run_script', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ filePath: filePath })
         })
         .then(response => {
             if (response.ok) {
