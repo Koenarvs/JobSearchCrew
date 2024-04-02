@@ -85,10 +85,14 @@ except Exception as e:
 
 result = crew.kickoff()
 
+# Get the current script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Set the file path to the project folder
+file_path = os.path.join(script_dir, "job_application_report.txt")
+
 # Save the job application report to a file on the desktop
 try:
-    desktop_path = os.path.expanduser("~/Desktop")
-    file_path = os.path.join(desktop_path, "job_application_report.txt")
     with open(file_path, 'a') as file:
         file.write(result + '\n\n')
 except Exception as e:

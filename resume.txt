@@ -1,0 +1,65 @@
+Gerald R Spangler III 
+
+Email: Koenar@Gmail.com | Phone: (330) 285-9917 | Linkedin: www.linkedin.com/in/gerald-spangler 
+
+Shape 
+
+Summary 
+
+Sr. Data Engineer with 10+ years of experience in solutioning complex data challenges into actionable insights, with a keen eye on the evolving role of AI to augment and streamline decision-making. Seeking a Sr Data Engineering role with a focus on Gen AI in Nashville TN or full remote.
+
+Technical Skills 
+
+ETL Processes (SSIS, Talend) 
+
+Data Warehouse Architecture 
+
+Reporting Tools (SSRS, Tableau, PowerBI, Sisense ) 
+
+Microsoft Excel (Advanced, VBA) 
+
+SQL and Database Management (T-SQL, Oracle, MySQL, Snowflake) 
+
+Cloud Platforms and Migration (GCP, AWS) 
+
+High Availability Systems (Multi-Node, Multi-Environment) 
+
+Programming and Scripting (VB.NET, C#.NET, ASP.NET, JavaScript, D3.js) 
+
+AI and Machine Learning Tools Integration (ChatGPT, GitHub Copilot) 
+
+Project Management & Agile Tools (Jira) 
+
+Professional Experience 
+
+Lead Data Engineer - Wellsky 
+
+Headed the migration of Tableau & Jasper servers to the Sisense platform, streamlining reporting tools and achieving a 20% reduction in reports. 
+
+Contributed to the transition from Oracle DB to Google BigQuery on GCP, enhancing cloud data storage and improving query efficiency. 
+
+Data Engineer IV - Invitation Homes 
+
+Founded and directed the Analytics Engineering team, implementing benchmarks for data processing using Snowflake DB and columnar data models, which resulted in a 90% decrease in average report load times. 
+
+Deployed a multi-environment (DEV, TEST, PROD) high-availability, multi-node Tableau Server architecture on AWS, successfully eliminating unscheduled downtime associated with Tableau Server. 
+
+Sr Data Engineer - naviHealth | Sedgwick CMS | InfoCision 
+
+Spearheaded a major overhaul of 30+ client-facing dashboards, achieving a 60% reduction in load times, significantly enhancing reliability, and reducing downtime from weekly instances to less than once quarterly. 
+
+Developed and maintained specialized healthcare data pipelines using SQL Server and Oracle DB, custom-tailored to meet advanced reporting needs and enhance operational efficiency. 
+
+Implemented transformative ETL solutions, drastically reducing reporting runtime from hours to minutes, thereby optimizing data flow and enhancing operational efficiency. 
+
+Managed comprehensive SQL, SSIS, and SSRS operations, enhancing data management and reporting capabilities for over 40 clients, ensuring exceptional data integrity and system reliability. 
+
+Education 
+
+The University of Akron 
+
+Field of Study: Bachelor of Fine Arts in Oil Painting (Coursework) 
+
+ 
+
+ 

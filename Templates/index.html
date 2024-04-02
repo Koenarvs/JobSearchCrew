@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Search</h1>
+        <div class="input-group">
+            <label for="file-path">Enter the file path:</label>
+            <input type="text" id="file-path" name="file-path" placeholder="Enter the file path...">
+        </div>
+        <button class="btn btn-primary" id="start-btn">Start</button>
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const filePathInput = document.getElementById('file-path');
+        const outputDiv = document.getElementById('output');
+    
+        startBtn.addEventListener('click', () => {
+            const filePath = filePathInput.value;
+    
+        // Make an AJAX request to the Flask server
+        fetch('/run_script', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ filePath: filePath })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.error);
+                });
+            }
+        })
+        .then(result => {
+            // Display the result in the output div
+            outputDiv.innerText = result;
+    
+                // Fetch the contents of job_application_report.txt
+                fetch('job_application_report.txt')
+                .then(response => response.text())
+                .then(reportContent => {
+                    // Display the report content in the output div
+                    outputDiv.innerText += '\n\nJob Application Report:\n' + reportContent;
+                })
+                .catch(error => {
+                    console.error('Error fetching job_application_report.txt:', error);
+                });
+            })
+            .catch(error => {
+                console.error('Error running main.py:', error);
+            });
+        });
+    </script>
+</body>
+</html>
