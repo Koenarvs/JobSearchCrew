@@ -1,6 +1,7 @@
 import os
-from dotenv import load_dotenv
+import sys  # Import the sys module for handling command-line arguments
 
+from dotenv import load_dotenv
 load_dotenv()
 
 from utils import log_agent_output
@@ -8,10 +9,6 @@ from crewai import Crew
 from tasks import JobSearchTasks
 from agents import JobSearchAgents
 from crewai_tools import SerperDevTool
-from langchain_community.document_loaders import TextLoader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
 
 # Set the environment variables
 try:
@@ -26,15 +23,20 @@ except KeyError as e:
 
 # Initialize necessary tools
 search_tool = SerperDevTool()
-
 tasks = JobSearchTasks()
 agents = JobSearchAgents(search_tool)
 
 print("## Welcome to the Job Search Crew")
 print('-------------------------------')
-resume_path = input("Enter the path to your resume file: ")
-resume_path = resume_path.strip('"')
 
+# Check if the file path is provided as a command-line argument
+if len(sys.argv) > 1:
+    resume_path = sys.argv[1]
+else:
+    print("No file path provided as a command-line argument.")
+    exit()
+
+# Open the resume file and read its content
 with open(resume_path, 'r') as file:
     resume_text = file.read()
 
@@ -87,7 +89,6 @@ result = crew.kickoff()
 
 # Get the current script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
 # Set the file path to the project folder
 file_path = os.path.join(script_dir, "job_application_report.txt")
 
