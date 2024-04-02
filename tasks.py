@@ -12,8 +12,8 @@ class JobSearchTasks():
 
     def search_jobs_task(self, agent):
         return Task(
-            description="""Conduct a comprehensive search for job opportunities that match the candidate's skills, experience, and qualifications based on the resume analysis provided.""",
-            expected_output="A list of relevant job postings, including their titles, companies, descriptions, and application URLs.",
+            description="""Conduct a comprehensive search for specific job opportunities that closely match the candidate's skills, experience, and qualifications based on the resume analysis provided. Focus on finding individual job postings with detailed descriptions and direct application links.""",
+            expected_output="A list of specific job postings, including the job title, company name, detailed description, and a direct link to apply for each position.",
             agent=agent,
             context_provider=lambda context: {'job_postings': context.get('job_postings', [])},
             result_context_key='job_postings'
@@ -22,7 +22,7 @@ class JobSearchTasks():
 
     def match_jobs_task(self, agent):
         return Task(
-            description="""Compare the candidate's qualifications with the requirements of each job posting. Determine the best matches based on the resume analysis and job postings provided in the previous tasks.""",
+            description="""Using the provided resume analysis and the list of job postings, compare the candidate's qualifications with the requirements of each job posting. Determine the best matches by evaluating how well the candidate's skills and experience align with the job requirements.""",
             expected_output="A list of the top matching job postings, with an explanation of why the candidate is qualified for each position.",
             agent=agent,
             context_provider=lambda context: {

@@ -25,6 +25,7 @@ class JobSearchAgents:
             allow_delegation=False,
             verbose=True,
             memory=True,
+            step_callback=lambda x: log_agent_output(x, "Job Search Agent"),
             tools=[self.search_tool],
             searcher_tool=self.search_tool
         )
@@ -56,7 +57,7 @@ class JobSearchAgents:
             allow_delegation=False,
             verbose=True,
             memory=True,
-            step_callback=lambda x: log_agent_output(x, "Job Matching Agent"),
+            step_callback=lambda x: log_agent_output(x, "Job Matcher Agent"),
             tools=[]
         )
 
@@ -80,6 +81,6 @@ Your ultimate objective is to create a report that not only informs the candidat
             allow_delegation=False,
             verbose=True,
             memory=True,
-            step_callback=lambda x: log_agent_output(x, "Crew"),
+            step_callback=lambda x: log_agent_output(x, "Report Writer"),
             tools=[]
         )
