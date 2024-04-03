@@ -78,10 +78,10 @@
         const startBtn = document.getElementById('start-btn');
         const filePathInput = document.getElementById('file-path');
         const outputDiv = document.getElementById('output');
-
+    
         startBtn.addEventListener('click', () => {
             const filePath = filePathInput.value;
-
+    
             // Make an AJAX request to the Flask server
             fetch('/run_script', {
                 method: 'POST',
@@ -90,31 +90,34 @@
                 },
                 body: JSON.stringify({ filePath: filePath })
             })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Error running the script');
-                }
-            })
-            .then(data => {
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-                // Display the formatted report content in the output div
-                outputDiv.innerHTML = formatReportContent(data.report);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                outputDiv.innerText = 'An error occurred while processing the request.';
-            });
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error running the script');
+                    }
+                })
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+    
+                    // Display the report content in the output div
+                    outputDiv.innerHTML = formatReportContent(data.report);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    outputDiv.innerText = 'An error occurred while processing the request.';
+                });
+        });
+    
         function formatReportContent(content) {
             // Replace newline characters with <br> tags
             const formattedContent = content.replace(/\n/g, '<br>');
-
+    
             // Add formatting styles using HTML tags
             const styledContent = formattedContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
+    
             return styledContent;
         }
     </script>

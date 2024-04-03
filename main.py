@@ -1,5 +1,6 @@
 import os
-import sys  # Import the sys module for handling command-line arguments
+import sys
+import json
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -33,6 +34,9 @@ print('-------------------------------')
 if len(sys.argv) > 1:
     resume_path = sys.argv[1]
 else:
+    # If the file path is not provided as a command-line argument, prompt the user for input
+    # resume_path = input("Enter the path to your resume file: ")
+    # resume_path = resume_path.strip('"')
     print("No file path provided as a command-line argument.")
     exit()
 
@@ -85,19 +89,23 @@ except Exception as e:
     print(f"Error: {e}. Failed to create Crew instance.")
     exit()
 
-result = crew.kickoff()
+# Execute the Crew and get the report text
+report_text = crew.kickoff()
 
 # Get the current script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Set the file path to the project folder
 file_path = os.path.join(script_dir, "job_application_report.txt")
 
-# Save the job application report to a file on the desktop
+# Save the job application report to a file
 try:
-    with open(file_path, 'a') as file:
-        file.write(result + '\n\n')
+    with open(file_path, 'w') as file:
+        file.write(report_text)
 except Exception as e:
     log_agent_output(str(e), "File Write Error")
     print(f"Error: {e}. Failed to write the job application report to the file.")
 else:
-    print(f"The job application report has been appended to: {file_path}")
+    print(f"The job application report has been saved to: {file_path}")
+
+# Return the report text as a JSON payload
+print(json.dumps({"report": report_text}))

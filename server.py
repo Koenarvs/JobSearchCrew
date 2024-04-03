@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import subprocess
 import os
 import logging
+import json
 
 app = Flask(__name__)
 
@@ -17,14 +18,10 @@ def index():
 
 @app.route('/run_script', methods=['POST'])
 def run_script():
-    try:
-        logging.info('Received request to run script')
-        data = request.get_json()
-        file_path = data['filePath']
-        logging.info(f'File path received: {file_path}')
-    except Exception as e:
-        logging.error(f"Error running the script: {str(e)}")
-        return jsonify({'error': 'An error occurred while running the script.'}), 500
+    logging.info('Received request to run script')
+    data = request.get_json()
+    file_path = data['filePath']
+    logging.info(f'File path received: {file_path}')
 
     # Run main.py with the provided file path
     result = subprocess.run(['python', 'main.py', file_path], capture_output=True, text=True)
@@ -32,15 +29,15 @@ def run_script():
     # Check if the script execution was successful
     if result.returncode == 0:
         logging.info('main.py executed successfully')
-        # Get the current script's directory
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        # Construct the file path to the project folder
-        report_path = os.path.join(script_dir, 'job_application_report.txt')
-        with open(report_path, 'r', encoding='utf-8') as file:
-            report_content = file.read()
-            report_content = report_content.encode('utf-8', 'replace').decode('utf-8')
-        # Return only the report content
-        return jsonify({'report': report_content})
+        # Extract the report text from the JSON payload
+        try:
+            report_data = json.loads(result.stdout)
+            report_text = report_data.get('report', '')
+        except json.JSONDecodeError:
+            logging.error('Error decoding JSON payload from main.py')
+            report_text = ''
+        # Return the report text
+        return jsonify({'report': report_text})
     else:
         logging.error('Error running main.py')
         logging.error(f'Error message: {result.stderr}')
