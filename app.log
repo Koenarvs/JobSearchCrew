@@ -1,0 +1,7 @@
+2024-04-06 13:04:31,674 - ERROR - Environment Variable Error: 'TAVILY_API_KEY'
+2024-04-06 13:04:31,674 - ERROR - Error: Please set the required environment variables.
+2024-04-06 13:04:50,337 - ERROR - Environment Variable Error: 'TAVILY_API_KEY'
+2024-04-06 13:04:50,337 - ERROR - Error: Please set the required environment variables.
+2024-04-06 13:11:59,766 - INFO - Welcome to the Job Search Crew
+2024-04-06 13:12:01,465 - ERROR - Agent Creation Error: 'tools'
+2024-04-06 13:12:01,465 - ERROR - Error: Failed to create agents.
