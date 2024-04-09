@@ -26,7 +26,6 @@ llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7)
 agent = create_structured_chat_agent(
     llm=llm,
     tools=[tavily_tool],
-    prompt="What happened in the latest burning man floods?"
 )
 print("Agent initialized.")
 

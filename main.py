@@ -4,6 +4,14 @@ from dotenv import load_dotenv
 # Ensure environment variables are loaded at the very beginning
 load_dotenv()
 
+# Now, setup logging as early as possible
+from log_setup import setup_logging
+
+# Determine if the application runs in debug mode based on command-line arguments
+debug_mode = "debug" in sys.argv
+setup_logging(debug_mode=debug_mode)
+
+# Following the setup of logging, import other modules
 from config import load_configuration
 from log_setup import setup_logging
 from initialize_agents import initialize_agents

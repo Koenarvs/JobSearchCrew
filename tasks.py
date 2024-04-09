@@ -102,14 +102,14 @@ class JobSearchTasks():
                 'matched_job_postings': context.get('matched_job_postings', [])
             },
             report_format="""
-**Job Title and Company:** {title}, {company}
+            **Job Title and Company:** {title}, {company}
 
-**Job Description:** {description}
+            **Job Description:** {description}
 
-**{candidate_name}'s Qualifications:** Your extensive experience and expertise in data engineering, specifically with technologies such as {skills}, make you a strong candidate for this role. Your background in {experience} aligns well with the job requirements.
+            **{candidate_name}'s Qualifications:** Your extensive experience and expertise in data engineering, specifically with technologies such as {skills}, make you a strong candidate for this role. Your background in {experience} aligns well with the job requirements.
 
-**Application Instructions:** Apply directly at the following link: {url}
+            **Application Instructions:** Apply directly at the following link: {url}
 
-**Additional Recommendations:** Tailor your resume and cover letter to highlight your relevant projects and achievements in {highlights}. Emphasize your passion for data engineering and your ability to deliver impactful solutions, {candidate_name}.
-"""
+            **Additional Recommendations:** Tailor your resume and cover letter to highlight your relevant projects and achievements in {highlights}. Emphasize your passion for data engineering and your ability to deliver impactful solutions, {candidate_name}.
+            """
         )
