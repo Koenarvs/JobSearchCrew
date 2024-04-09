@@ -9,6 +9,9 @@ A CrewAI-powered application designed to streamline the job search process by an
 * Job Matching Agent: Compares the candidate's qualifications with job postings to determine the best matches.
 * Report Writer: Generates a detailed report showcasing the candidate's suitability for each matched job posting.
 
+![Untitled diagram-2024-04-09-230955](https://github.com/Koenarvs/JobSearchCrew/assets/26799384/d91ce8fa-1290-4622-b537-7f5637a6ed77)
+
+
 ## Getting Started
 
 ### Prerequisites
