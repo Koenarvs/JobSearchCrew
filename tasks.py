@@ -79,7 +79,7 @@ class JobSearchTasks():
             The output should be formatted in a way that makes it easy for the next agent to perform a comparative analysis between the specific job postings and the candidate's resume.
             """),
             agent=agent,
-            context_provider=lambda context: {'job_postings': context.get('job_postings', [])},
+            context_provider=lambda context: {'resume_info': context.get('resume_analysis', {})},
             result_context_key='job_postings'
         )
     def match_jobs_task(self, agent):
@@ -88,7 +88,7 @@ class JobSearchTasks():
             expected_output="A list of the top matching job postings, with an explanation of why the candidate is qualified for each position. The explanation should refer to the candidate by name.",
             agent=agent,
             context_provider=lambda context: {
-                'resume_analysis': context.get('resume_analysis', ''),
+                'resume_info': context.get('resume_analysis', {}),
                 'job_postings': context.get('job_postings', [])
             }
         )
@@ -99,6 +99,7 @@ class JobSearchTasks():
             expected_output="A well-formatted, personalized report that the candidate can use to apply for the selected job postings. The report should address the candidate by name throughout.",
             agent=agent,
             context_provider=lambda context: {
+                'resume_info': context.get('resume_analysis', {}),
                 'matched_job_postings': context.get('matched_job_postings', [])
             },
             report_format="""

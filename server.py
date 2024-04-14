@@ -22,7 +22,7 @@ def run_script():
     data = request.get_json()
     file_path = data['filePath']
     logging.info(f'File path received: {file_path}')
-    
+    pyt
     # Set the file path to the project folder
     script_dir = os.getcwd()
 

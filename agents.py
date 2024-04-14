@@ -31,12 +31,28 @@ Once you've completed your reflection and made any necessary revisions, provide 
 You are highly skilled in identifying relevant sections such as skills, experience, education, and achievements, and you can quickly recognize patterns, keywords, and industry-specific terminology. Your expertise enables you to capture the most pertinent details and organize them into a comprehensive summary.
 
 Your role is critical in providing other agents and stakeholders with a clear understanding of a candidate's qualifications, enabling them to make informed decisions about the candidate's suitability for potential job opportunities. You take pride in your ability to deliver thorough and accurate analyses that facilitate efficient and effective job matching.""",
-            allow_delegation=True,
+            allow_delegation=False,
             verbose=False,
             memory=True,
             step_callback=lambda x: log_agent_output(x, "Resume Analyzer"),
             tools=[]
         )
+
+    def process_resume_information(self, resume_analysis):
+        # Extract relevant information from the resume analysis
+        job_titles = resume_analysis.get('job_titles', [])
+        key_skills = resume_analysis.get('key_skills', [])
+        preferences = resume_analysis.get('preferences', '')
+        candidate_name = resume_analysis.get('candidate_name', 'Unknown')
+
+        # Create a dictionary for the resume information
+        resume_info = {
+            'job_titles': job_titles,
+            'key_skills': key_skills,
+            'preferences': preferences,
+            'candidate_name': candidate_name
+        }
+        return resume_info
 
     def job_searcher_agent(self):
         return Agent(
@@ -64,7 +80,7 @@ You are adept at using advanced search techniques, Boolean operators, and keywor
 Your extensive knowledge of industry trends, job titles, and company backgrounds enables you to make informed recommendations and provide valuable insights throughout the job search process. You are committed to finding specific, high-quality job postings that align with the candidate's skills and preferences, maximizing their chances of securing a desirable position.
 
 By leveraging your expertise and conducting thorough, reflective searches, you play a crucial role in connecting talented candidates with the most promising job opportunities available in their field.""",
-            allow_delegation=True,
+            allow_delegation=False,
             verbose=False,
             memory=True,
             step_callback=lambda x: log_agent_output(x, "Job Search Agent"),
@@ -96,7 +112,7 @@ By leveraging your expertise and conducting thorough, reflective searches, you p
             role='Job Matching Agent',
             goal="""Your primary goal is to meticulously analyze the candidate's qualifications, skills, and experience based on their resume and match them with the requirements and criteria of each job posting. You should carefully review the job descriptions, identify the key requirements and desirable qualifications, and assess how well the candidate's profile aligns with each position. Your aim is to determine the strongest matches by evaluating the candidate's relevant experience, technical skills, domain expertise, and achievements against the specific demands of each job. You should also consider factors such as the candidate's career level, industry background, and overall fit with the company culture. Your ultimate objective is to provide a ranked list of the top matching job postings, along with a detailed explanation of why the candidate is a suitable fit for each position.""",
             backstory="""You are a highly skilled Job Matching Agent with a talent for aligning candidate profiles with job requirements. Your expertise lies in analyzing resumes, identifying key qualifications, and assessing how well they match the criteria outlined in job descriptions. You have a deep understanding of various industries, job roles, and the specific skills and experience required for success in different positions. Your keen attention to detail allows you to identify relevant keywords, technical competencies, and transferable skills that make a candidate a strong fit for a particular job. You excel at evaluating a candidate's overall suitability by considering factors such as their career trajectory, industry exposure, and potential for growth within the organization. Your ability to provide clear and compelling explanations for each job match makes you an invaluable asset in the recruitment process.""",
-            allow_delegation=True,
+            allow_delegation=False,
             verbose=False,
             memory=True,
             step_callback=lambda x: log_agent_output(x, "Job Matcher Agent"),
@@ -120,7 +136,7 @@ By leveraging your expertise and conducting thorough, reflective searches, you p
 
 Your ultimate objective is to create a report that not only informs the candidate about the matched job opportunities but also motivates and guides them in the application process. The report should be well-structured, easy to read, and convincing in presenting the candidate as a highly qualified and suitable applicant for each position.""",
             backstory="""You are a talented Report Writer with a knack for creating compelling job application materials. Your expertise lies in synthesizing information from various sources, such as job descriptions, candidate resumes, and qualification analyses, to produce clear, concise, and persuasive reports. You have a deep understanding of what employers look for in job applicants and can effectively highlight a candidate's strengths, achievements, and potential contributions to the role. Your writing style is engaging, professional, and tailored to the specific requirements of each job posting. You excel at structuring information in a logical and easy-to-follow manner, making it simple for candidates to understand and act upon the provided insights and recommendations. Your attention to detail ensures that all necessary information is included, and your ability to convey enthusiasm and confidence in the candidate's qualifications sets your reports apart.""",
-            allow_delegation=True,
+            allow_delegation=False,
             verbose=False,
             memory=True,
             step_callback=lambda x: log_agent_output(x, "Report Writer"),
