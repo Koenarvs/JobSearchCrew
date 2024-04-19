@@ -6634,3 +6634,18 @@
 2024-04-11 11:13:11,296 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2024-04-11 11:13:18,604 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2024-04-11 11:13:18,605 - root - INFO - The job application report has been saved to: C:\Users\Koena\Documents\GitHub\JobSearchCrew\job_application_report.txt
+2024-04-14 16:59:41,154 - root - INFO - Test log entry - if you see this, logging to file works.
+2024-04-14 16:59:44,797 - root - INFO - Test log entry - if you see this, logging to file works.
+2024-04-14 16:59:47,812 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:16,222 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:17,346 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:18,680 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:19,869 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:21,645 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:37,575 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:38,322 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:00:42,345 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:01:01,387 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:01:02,788 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:01:30,757 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-04-14 17:01:30,759 - root - INFO - The job application report has been saved to: C:\Users\Koena\Documents\GitHub\JobSearchCrew\job_application_report.txt

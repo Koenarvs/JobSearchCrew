@@ -25,19 +25,19 @@ class JobSearchTasks():
             Resume Text:
             {resume_text}
             """),
-            expected_output="""
-            A well-structured summary of the candidate's profile, including:
-            1. Candidate's name
-            2. A list of the candidate's key skills, with a focus on those most relevant to their desired role
-            3. A brief overview of the candidate's relevant experience, highlighting notable achievements and responsibilities
-            4. Any notable qualifications, such as degrees, certifications, or awards
-            5. The candidate's preferred work location and "Remote/Work from Home" if a location is specified (unless the candidate explicitly states they are not interested in remote work)
-                - If no location is mentioned, include only "Remote/Work from Home"
-            6. A list of 5-10 recommended job titles that best match the candidate's qualifications, starting with their current and previous job titles and building upon them based on their skills, experience, and domain expertise
-            7. Any additional information that could help match the candidate to suitable job opportunities
-
-            The summary should be concise yet comprehensive, providing a clear picture of the candidate's strengths and suitability for potential job opportunities.
-            """,
+            expected_output=dedent("""
+            Return a dictionary containing:
+            {
+                'name': 'Candidate's name',
+                'key_skills': ['List', 'of', 'key', 'skills'],
+                'experience': 'Brief overview of relevant experience',
+                'qualifications': 'List of notable qualifications',
+                'work_location': 'Preferred work location',
+                'recommended_job_titles': ['List', 'of', 'recommended', 'job', 'titles'],
+                'additional_info': 'Any other important information'
+            }
+            This dictionary should provide a concise yet comprehensive summary of the candidate's profile, detailing their strengths and suitability for potential job opportunities.
+            """),
             agent=agent,
             result_context_key='resume_analysis'
         )
@@ -45,50 +45,33 @@ class JobSearchTasks():
     def search_jobs_task(self, agent):
         return Task(
             description=dedent("""
-            Conduct a comprehensive search for specific, individual job postings that closely match the candidate's skills, experience, qualifications, and recommended job titles based on the resume analysis provided. Focus on finding detailed job descriptions with direct application links.
+            Use the SerperDevTool to conduct a comprehensive search for new job postings, specifically focusing on positions that are not part of the candidate's current or previous job titles as listed in their resume. Utilize the recommended job titles and work locations provided in the resume analysis as key filters for your search.
 
-            For each job posting, include the following information:
-            1. Job Title
-            2. Company Name
-            3. Detailed description of the role and requirements
-            4. A valid and direct link to apply for the specific position
+            It's crucial to ensure each search result reflects a specific, individual job opportunity—not a general listing that aggregates multiple jobs. If the search results include links to job boards or pages listing multiple job opportunities, refine your search criteria to target unique job postings. Each listing should be for a distinct position with a clear job title and detailed description available.
 
-            Ensure that the job postings meet the following criteria:
-            1. Each result must be a specific, individual job posting with a detailed description, not a general listing or aggregation of multiple jobs
-            2. The job title, company name, detailed description, and a valid, direct application URL must be available for each posting
-            3. The job aligns with the candidate's preferred work location(s), including remote work options if applicable
-            4. The job title closely matches or is directly related to one of the recommended job titles from the resume analysis
-
-            If the initial search yields fewer than 10 results that meet all the criteria, conduct additional targeted searches to find more relevant, specific job postings. Repeat the search process up to a maximum of 5 times or until you have at least 10 qualifying results, whichever comes first. If after 5 search attempts you still have fewer than 10 qualifying results, proceed with the available postings that fully meet the criteria.
-
-            Once you have completed your search and reflection process, format the output as a structured list of specific job postings, with each posting containing the required information.
+            Continue refining your search by using insights gained from previous results if the initial search yields fewer than 10 suitable postings. Your goal is to gather at least 10 specific job postings that closely match the candidate's desired job titles and locations, each with a detailed description and a direct application link.
             """),
             expected_output=dedent("""
-            A well-structured list of specific, individual job postings, with each posting containing:
+            A structured list of at least 10 specific job postings, ensuring none are generic or aggregate listings, with each including:
             1. Job Title
             2. Company Name
-            3. Detailed description of the role and requirements
-            4. A valid and direct link to apply for the specific position
-
-            The list should include a minimum of 10 job postings that closely match the candidate's skills, experience, qualifications, preferred work location(s) (including remote work options if applicable), and recommended job titles from the resume analysis.
-
-            Each job posting must be a specific, individual listing with a detailed description and direct application link. General job listings or aggregations should not be included.
-
-            If after 5 search attempts there are still fewer than 10 qualifying job postings that fully meet the criteria, provide the available postings that match all the requirements.
-
-            The output should be formatted in a way that makes it easy for the next agent to perform a comparative analysis between the specific job postings and the candidate's resume.
+            3. Detailed description of the role
+            4. A valid link to apply
+            The list should reflect the candidate's specified job titles and work locations, aligning closely with their career objectives and geographical preferences.
             """),
             agent=agent,
-            context_provider=lambda context: {'resume_info': context.get('resume_analysis', {})},
+            context_provider=lambda context: {'resume_info': context.get('resume_analysis', [])},
             result_context_key='job_postings'
         )
+
+
     def match_jobs_task(self, agent):
         return Task(
             description="""Using the provided resume analysis and the list of job postings, compare the candidate's qualifications with the requirements of each job posting. Determine the best matches by evaluating how well the candidate's skills, experience, and recommended job titles align with the job requirements. When referring to the candidate, use their name as provided in the resume analysis.""",
             expected_output="A list of the top matching job postings, with an explanation of why the candidate is qualified for each position. The explanation should refer to the candidate by name.",
             agent=agent,
             context_provider=lambda context: {
-                'resume_info': context.get('resume_analysis', {}),
+                'resume_info': context.get('resume_analysis', []),
                 'job_postings': context.get('job_postings', [])
             }
         )
