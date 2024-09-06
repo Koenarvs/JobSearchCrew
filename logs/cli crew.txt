@@ -1,0 +1,2 @@
+C:\Users\Koena\Documents\GitHub\JobSearchCrew>python server.py
+ python main.py resume.txt

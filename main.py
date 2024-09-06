@@ -1,7 +1,12 @@
 import sys
 import logging
 from dotenv import load_dotenv
-load_dotenv()  # Load environment variables at the very beginning
+
+# Immediate log to test early script execution
+logging.basicConfig(level=logging.DEBUG)
+logging.debug("Starting script execution.")
+
+load_dotenv(verbose=True)  # Load environment variables at the very beginning
 
 from config import load_configuration
 from log_setup import setup_logging
@@ -9,6 +14,7 @@ from initialize_agents import initialize_agents
 from create_tasks import create_tasks
 from crew_execution import execute_crew_and_generate_report, save_report
 from crewai_tools import SerperDevTool  # Adjust based on actual module path
+#from google_jobs_api_tool import GoogleJobsAPITool
 
 def main():
     # Determine if the application runs in debug mode based on command-line arguments
@@ -17,6 +23,7 @@ def main():
 
     config = load_configuration()
     search_tool = SerperDevTool(api_key=config["SERPER_API_KEY"])
+    #search_tool = GoogleJobsAPITool()
     agents = initialize_agents(search_tool)
 
     if len(sys.argv) > 1 and sys.argv[-1] != "debug":
