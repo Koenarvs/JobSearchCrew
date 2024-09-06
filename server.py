@@ -10,7 +10,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # Configure Flask to serve static files from the current directory
-app.static_folder =  os.path.dirname(os.path.abspath(__file__))
+app.static_folder = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def index():
@@ -22,9 +22,9 @@ def run_script():
     data = request.get_json()
     file_path = data['filePath']
     logging.info(f'File path received: {file_path}')
-    pyt
+
     # Set the file path to the project folder
-    script_dir = os.getcwd()
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Create the stdout.log file if it doesn't exist
     stdout_file = os.path.join(script_dir, 'stdout.log')
@@ -38,8 +38,6 @@ def run_script():
     # Check if the script execution was successful
     if result.returncode == 0:
         logging.info('main.py executed successfully')
-        # Set the file path to the project folder
-        script_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(script_dir, "job_application_report.txt")
         
         # Read the report text from the file
@@ -48,10 +46,10 @@ def run_script():
                 report_text = file.read()
         except FileNotFoundError:
             logging.error(f"File not found: {file_path}")
-            report_text = ''
+            return jsonify({'error': 'Report file not found'}), 404
         except Exception as e:
             logging.error(f"Error reading file: {str(e)}")
-            report_text = ''
+            return jsonify({'error': 'Error reading report file'}), 500
         
         # Return the report text
         return jsonify({'report': report_text})
@@ -63,4 +61,5 @@ def run_script():
         return jsonify({'error': error_message}), 500
 
 if __name__ == '__main__':
-    app.run()
+    # Run the app on 0.0.0.0 (all interfaces) and port 5000
+    app.run(host='0.0.0.0', port=5000)
