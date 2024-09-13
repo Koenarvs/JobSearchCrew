@@ -1,0 +1,30 @@
+graph TD
+    A[User Uploads Resume] --> B[Master Coordinator Agent]
+    C[User Sets Preferences] --> B
+    B --> D[Resume Processing Crew]
+    D --> E[Parse Resume]
+    D --> F[Extract Skills & Experience]
+    D --> G[RAG: Enhanced Resume Understanding]
+    E & F & G --> H[Vector DB: Store Processed Resume]
+    B --> I[Vector DB: Job Titles & Skills]
+    H --> J[Job Search Crew]
+    I --> J
+    J --> K[RAG: Generate Search Queries]
+    K --> L[Search Job Postings]
+    L --> M[Filter Initial Results]
+    M --> N[Vector DB: Store Job Postings]
+    N --> O[Matching Crew]
+    H --> O
+    I --> O
+    O --> P[Compare Resume to Jobs]
+    O --> Q[RAG: Enhance Matching]
+    O --> R[Score Matches]
+    P & Q & R --> S{Enough High-Score Matches?}
+    S -->|Yes| T[Select Top 20 Matches]
+    T --> U[Report Generation Crew]
+    U --> V[Create Job Match Explanations]
+    U --> W[Generate Resume Feedback]
+    U --> X[Compile Final Report]
+    X --> Y[Present Results to User]
+    B --> U
+    B --> Y

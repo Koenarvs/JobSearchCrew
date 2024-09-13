@@ -1,0 +1,19 @@
+graph TD
+    A[User Sets Preferences] --> B[Master Coordinator Agent]
+    C[User Uploads Resume] --> B
+    B --> D[Resume Processing Crew]
+    E[Vector DB: Job Titles & Skills] --> D
+    D --> F[Vector DB: Store Processed Resume]
+    F --> G[Job Search Crew]
+    E --> G
+    G --> H[Search Job Postings]
+    H --> I[Vector DB: Store Job Postings]
+    F --> J[Matching Crew]
+    I --> J
+    J --> K[Score Matches]
+    K --> L{Enough High-Score Matches?}
+    L -->|No| G
+    L -->|Yes| M[Select Top 20 Matches]
+    M --> N[Report Generation Crew]
+    B --> N
+    N --> O[Present Results to User]

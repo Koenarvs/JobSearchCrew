@@ -1,17 +1,27 @@
-// This file will contain functions for making API calls to your backend
-// For now, we'll just add placeholder functions
+const API_BASE_URL = 'http://localhost:5000';  // Adjust this if your backend is on a different port
 
-export const uploadResume = async (file) => {
-    // TODO: Implement resume upload logic
-    console.log('Uploading resume:', file);
-    return { success: true, message: 'Resume uploaded successfully' };
-  };
-  
-  export const getJobMatches = async () => {
-    // TODO: Implement job matching logic
-    console.log('Fetching job matches');
-    return [
-      { id: 1, title: 'Software Developer', company: 'Tech Co' },
-      { id: 2, title: 'Data Analyst', company: 'Data Corp' },
-    ];
-  };
+export const uploadResume = async (filePath) => {
+  const response = await fetch(`${API_BASE_URL}/api/upload_resume`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ file_path: filePath }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to upload resume');
+  }
+
+  return response.json();
+};
+
+export const getJobMatches = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/job_matches`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch job matches');
+  }
+
+  return response.json();
+};
